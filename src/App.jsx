@@ -5,6 +5,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from './login'
 import SignUp from './SignUp'
 import Home from './home'; // 👈 import Home component
+import MedicalDeclaration from './Customer/MedicalDeclaration'
+import Success from './Customer/Success'
 
 function App() {
 
@@ -14,7 +16,9 @@ function App() {
         
         <Route path="/login" element={<Login />} />
         <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/" element={<Home />} />         {/* 👈 Homepage */}
+        <Route path="/home" element={<Home />} />         {/* 👈 Homepage */}
+        <Route path="/md" element={<MedicalDeclaration />} />
+        <Route path="/success" element={<Success />} />
       </Routes>
     </BrowserRouter>
   );

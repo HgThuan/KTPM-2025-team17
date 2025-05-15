@@ -1,6 +1,13 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom';
+
 
 export default function Center() {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/md"); // hoặc đường dẫn tương ứng với route bạn đã đặt
+  };
   return (
     <div className="bg-[#f5f6fa] min-h-screen py-10 px-4">
       <div className="max-w-screen-xl mx-auto text-center">
@@ -24,10 +31,17 @@ export default function Center() {
           </div>
 
           {/* Khai báo y tế */}
-          <div className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center">
-            <img src="https://dkkham.bachmai.gov.vn/build/assets/healthcare-ca9c18b6.png" alt="Khai báo y tế" className="w-20 h-20 mb-4" />
-            <h3 className="text-lg font-semibold text-green-800">Khai báo y tế</h3>
-          </div>
+          <div
+              onClick={handleClick}
+              className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center cursor-pointer hover:shadow-lg transition"
+              >
+              <img
+                src="https://dkkham.bachmai.gov.vn/build/assets/healthcare-ca9c18b6.png"
+                alt="Khai báo y tế"
+                className="w-20 h-20 mb-4"
+              />
+              <h3 className="text-lg font-semibold text-green-800">Khai báo y tế</h3>
+            </div>
         </div>
 
         {/* Thông tin tổng đài */}
