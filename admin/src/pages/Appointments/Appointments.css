@@ -1,0 +1,151 @@
+.appointments-section {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Calendar styles */
+.calendar-container {
+  margin-bottom: 24px;
+}
+
+.calendar-header {
+  text-align: center;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendar-arrow {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 5px 15px;
+}
+
+.calendar-date-label {
+  font-weight: bold;
+  font-size: 22px;
+  margin: 0 18px;
+}
+
+.calendar-days {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.calendar-day {
+  text-align: center;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 8px;
+  flex: 1;
+}
+
+.calendar-day:hover {
+  background-color: #f0f0f0;
+}
+
+.calendar-day.active {
+  background-color: #2196f3;
+  color: white;
+}
+
+.day-name {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.day-number {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Appointment list styles */
+.appointments-list {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 24px;
+}
+
+.appointments-list.empty {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.appointment-item {
+  display: flex;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+  align-items: center;
+}
+
+.appointment-time {
+  font-weight: bold;
+  min-width: 80px;
+}
+
+.appointment-details {
+  margin-left: 20px;
+}
+
+.patient-id {
+  color: #666;
+  font-size: 14px;
+}
+
+.patient-name {
+  font-weight: 500;
+}
+
+/* Button styles */
+.add-appointment-btn-container {
+  text-align: center;
+  margin: 24px 0;
+}
+
+/* Form styles */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .calendar-day {
+    padding: 5px;
+  }
+  
+  .day-name {
+    font-size: 12px;
+  }
+  
+  .day-number {
+    font-size: 16px;
+  }
+}
