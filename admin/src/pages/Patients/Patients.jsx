@@ -17,19 +17,53 @@ const Patients = () => {
   const [showRestoreModal, setShowRestoreModal] = useState(false);
 
   // Load dữ liệu ban đầu
-  useEffect(() => {
-    // TODO: Fetch data từ API
-    const mockPatients = [
-      { id: 'BN001', name: 'Nguyễn Văn A', dob: '1990-01-01', gender: 'Nam', phone: '0987654321', email: 'a@example.com' }
-    ];
-    setPatients(mockPatients);
-  }, []);
-
-  // Xử lý thêm bệnh nhân
-  const handleAddPatient = (newPatient) => {
-    setPatients([...patients, newPatient]);
+// Lấy danh sách bệnh nhân khi load trang (sửa lại useEffect)
+useEffect(() => {
+  async function fetchPatients() {
+    try {
+      const res = await fetch('http://localhost:5000/api/v1/patients');
+      const data = await res.json();
+      setPatients(data);
+    } catch (error) {
+      alert('Lỗi khi tải danh sách bệnh nhân');
+      console.error(error);
+    }
+  }
+  fetchPatients();
+}, []);
+// Cập nhật bệnh nhân - gọi API PUT
+const handleUpdatePatient = async (updatedPatient) => {
+  try {
+    const res = await fetch(`http://localhost:5000/api/v1/patients/${updatedPatient.id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(updatedPatient),
+    });
+    const data = await res.json();
+    setPatients(patients.map(p => (p.id === data.id ? data : p)));
     setShowAddModal(false);
-  };
+  } catch (error) {
+    alert('Lỗi khi cập nhật bệnh nhân');
+    console.error(error);
+  }
+};
+
+// Thêm bệnh nhân - gọi API POST
+const handleAddPatient = async (newPatient) => {
+  try {
+    const res = await fetch('http://localhost:5000/api/v1/patients', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newPatient),
+    });
+    const data = await res.json();
+    setPatients([...patients, data]);
+    setShowAddModal(false);
+  } catch (error) {
+    alert('Lỗi khi thêm bệnh nhân');
+    console.error(error);
+  }
+};
 
   // Xử lý khôi phục bệnh nhân
   const handleRestorePatient = (patient) => {
