@@ -8,7 +8,8 @@ import Register from './Register';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import MedicalDeclaration from './Customer/MedicalDeclaration';
-import Success from './Customer/Success';
+import AppointmentForm from './Customer/AppointmentForm';
+
 function App() {
 
   return (
@@ -19,7 +20,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/sign-up" element={<Register />} />
         <Route path="/md" element={<MedicalDeclaration />} />
-        <Route path="/success" element={<Success />} />
+        <Route path="/datlich" element={<AppointmentForm/>} />
+
       </Routes>
     </BrowserRouter>
   );
