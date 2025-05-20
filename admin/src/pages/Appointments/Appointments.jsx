@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { format, addWeeks, subWeeks, startOfWeek, addDays } from 'date-fns';
 import { vi } from 'date-fns/locale';
 import Button from '../../Components/UI/Button';
@@ -17,6 +17,9 @@ const Appointments = () => {
     patientName: ''
   });
 
+  const formatDate = (date) => {
+    return date.toISOString().split('T')[0];
+  };
   // Tạo danh sách ngày trong tuần
   const getWeekDays = () => {
     const startDate = startOfWeek(currentWeek, { locale: vi });
@@ -54,7 +57,20 @@ const Appointments = () => {
       format(appt.date, 'yyyy-MM-dd') === format(selectedDate, 'yyyy-MM-dd')
     );
   };
-
+  // Fetch lịch hẹn khi selectedDate hoặc currentWeek thay đổi
+  useEffect(() => {
+    const fetchAppointments = async () => {
+      try {
+        const dateStr = formatDate(selectedDate);
+        const res = await fetch(`http://localhost:5000/api/v1/appointments?date=${dateStr}`);
+        const data = await res.json();
+        setAppointments(data);
+      } catch (error) {
+        console.error('Lỗi lấy lịch hẹn:', error);
+      }
+    };
+    fetchAppointments();
+  }, [selectedDate, currentWeek]);
   return (
     <section className="appointments-section">
       <h2>Lịch hẹn</h2>

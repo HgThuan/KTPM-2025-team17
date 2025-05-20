@@ -17,7 +17,7 @@ export default function Center() {
         {/* Danh sách dịch vụ */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 justify-center">
           {/* Đặt lịch khám bác sĩ */}
-          <div className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center">
+          <div className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center"onClick={() => navigate("/datlich")}>
             <img src="https://dkkham.bachmai.gov.vn/build/assets/stethoscope-1c43adff.png" alt="Đặt lịch khám bác sĩ" className="w-20 h-20 mb-4" />
             <h3 className="text-lg font-semibold text-green-800">Đặt lịch khám bác sĩ</h3>
           </div>

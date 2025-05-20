@@ -52,7 +52,7 @@ export default function Navbar() {
         <div className="max-w-screen-xl mx-auto flex justify-center space-x-8 py-2">
           <a href="#" className="text-white font-semibold uppercase text-sm">Cổng thông tin</a>
           <a href="#" className="text-white font-semibold uppercase text-sm">Chuyên gia</a>
-          <a href="#" className="text-white font-semibold uppercase text-sm">Đặt lịch khám</a>
+          <a href="#" className="text-white font-semibold uppercase text-sm" onClick={() => navigate("/datlich")}>Đặt lịch khám</a>
           <a href="#" className="text-white font-semibold uppercase text-sm">Tra cứu kết quả</a>
         </div>
       </div>

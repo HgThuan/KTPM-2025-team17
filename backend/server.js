@@ -156,6 +156,9 @@ app.post('/api/v1/patients/:id/restore', async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+//dat lich
+const appointmentRoutes = require('./routes/appointmentRoutes');
+app.use('/api/v1/appointments', appointmentRoutes);
 
 const PORT = process.env.PORT || 5000;
 

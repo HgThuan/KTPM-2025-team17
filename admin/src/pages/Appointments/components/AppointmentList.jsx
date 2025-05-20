@@ -14,16 +14,16 @@ const AppointmentList = ({ appointments, selectedDate }) => {
 
   return (
     <div className="appointments-list">
-      <h3>{format(selectedDate, 'PPPP', { locale: vi })}</h3>
+      <h3>{format(selectedDate, 'PPPP', { locale: vi })} (Lịch hẹn)</h3>
       <ul>
         {appointments.map(appt => (
-          <li key={appt.id} className="appointment-item">
+          <li key={appt._id} className="appointment-item">
             <div className="appointment-time">
               {appt.time}
             </div>
             <div className="appointment-details">
-              <div className="patient-id">{appt.patientId}</div>
-              <div className="patient-name">{appt.patientName}</div>
+              <div><strong>Họ tên:</strong> {appt.name || 'Chưa có' }</div>
+              <div><strong>Số điện thoại:</strong> {appt.patientId || appt.phone || 'Chưa có'}</div>
             </div>
           </li>
         ))}
