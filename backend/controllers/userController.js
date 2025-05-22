@@ -1,31 +1,48 @@
 const bcrypt = require('bcryptjs');
 const userModel = require('../models/userModels');
 const jwt = require('jsonwebtoken');
+
 const registerController = async (req, res) => {
-  console.log("Received signup request with body:", req.body);
   const { name, email, password } = req.body;
 
   try {
+    // Kiểm tra user tồn tại
     const existingUser = await userModel.findOne({ email });
     if (existingUser) {
-      return res.status(200).send({ success: false, message: 'User Already Exist' });
+      return res.status(200).send({
+        success: false,
+        message: 'Người dùng đã tồn tại',
+      });
     }
 
+    // Hash password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
+    // Đếm số lượng user đã có
+    const userCount = await userModel.countDocuments();
+    const newUserId = `BN${userCount + 1}`;
+
+    // Tạo user mới
     const newUser = new userModel({
       name,
       email,
       password: hashedPassword,
+      userId: newUserId,
     });
 
     await newUser.save();
-    console.log("User saved");
-    res.status(201).json({ success: true, message: 'Đăng ký thành công' });
+
+    res.status(201).send({
+      success: true,
+      message: 'Đăng ký thành công',
+      userId: newUserId
+    });
   } catch (error) {
-    console.log(error);
-    res.status(500).send({ success: false, message: `Lỗi đăng ký: ${error.message}` });
+    res.status(500).send({
+      success: false,
+      message: `Lỗi đăng ký: ${error.message}`,
+    });
   }
 };
 

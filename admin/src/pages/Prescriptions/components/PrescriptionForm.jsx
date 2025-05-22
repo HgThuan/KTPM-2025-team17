@@ -6,7 +6,7 @@ const PrescriptionForm = () => {
   const [formData, setFormData] = useState({
     patientId: '',
     diagnosis: '',
-    medicines: [{ name: '', quantity: 1 }]
+    medicines: [{ name: '', quantity: '' }]
   });
 
   const handleChange = (e) => {
@@ -15,10 +15,10 @@ const PrescriptionForm = () => {
   };
 
   const handleMedicineChange = (index, e) => {
-    const { name, value } = e.target;
-    const newMedicines = [...formData.medicines];
-    newMedicines[index][name] = name === 'quantity' ? parseInt(value) : value;
-    setFormData(prev => ({ ...prev, medicines: newMedicines }));
+      const { name, value } = e.target;
+      const newMedicines = [...formData.medicines];
+      newMedicines[index][name] = value; // giữ nguyên chuỗi
+      setFormData(prev => ({ ...prev, medicines: newMedicines }));
   };
 
   const addMedicine = () => {
@@ -36,11 +36,38 @@ const PrescriptionForm = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Form submitted:', formData);
-    // TODO: Xử lý submit form (gọi API, lưu vào state global...)
-  };
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  
+  try {
+    const response = await fetch('http://localhost:5000/api/prescriptions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const result = await response.json();
+    console.log('Prescription saved:', result);
+    alert('Prescription saved successfully!');
+    
+    // Reset form after successful submission
+    setFormData({
+      patientId: '',
+      diagnosis: '',
+      medicines: [{ name: '', quantity: 1 }]
+    });
+    
+  } catch (error) {
+    console.error('Error saving prescription:', error);
+    alert('Failed to save prescription. Please try again.');
+  }
+};
 
   return (
     <section className="prescription-section">
@@ -84,15 +111,13 @@ const PrescriptionForm = () => {
                   required
                 />
                 <input
-                  type="number"
-                  name="quantity"
-                  value={medicine.quantity}
-                  onChange={(e) => handleMedicineChange(index, e)}
-                  min="1"
-                  step="1"
-                  placeholder="Số lượng"
-                  required
-                  className="quantity-input"
+                    type="text"
+                    name="quantity"
+                    value={medicine.quantity}
+                    onChange={(e) => handleMedicineChange(index, e)}
+                    placeholder="Cách dùng + liều lượng"
+                    required
+                    className="quantity-input"
                 />
                 <Button
                   type="button"
@@ -116,7 +141,7 @@ const PrescriptionForm = () => {
 
         <div className="form-actions">
           <Button type="submit" className="edit">
-            Lưu đơn thuốc
+            Gửi chuẩn đoán
           </Button>
         </div>
       </form>

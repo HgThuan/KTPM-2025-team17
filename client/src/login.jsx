@@ -82,7 +82,8 @@ export default function Login ()  {
           </Button>
           <p className="align-self-center">
             Bạn chưa có tài khoản? <Link to="/sign-up">Đăng ký</Link>
-          </p>
+         </p>
+          {/*<p className="align-self-center">Bạn là bác sĩ? <Link to="/sign-up">Đăng nhập </Link></p> */ }
         </Form>
       </Container>
     </div>

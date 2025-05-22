@@ -23,7 +23,7 @@ export default function Center() {
           </div>
 
           {/* Thông tin bác sĩ */}
-          <div className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center">
+          <div className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center"onClick={() => navigate("/thongtinbacsi")}>
             <img src="https://dkkham.bachmai.gov.vn/build/assets/medical-book-5772752e.png" alt="Thông tin bác sĩ" className="w-20 h-20 mb-4" />
             <h3 className="text-lg font-semibold text-green-800">Thông tin bác sĩ</h3>
           </div>
