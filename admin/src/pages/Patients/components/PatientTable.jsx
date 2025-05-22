@@ -24,7 +24,7 @@ const PatientTable = ({ patients, onViewRecord }) => {
         <tbody>
           {patients.map((patient, index) => (
             <tr key={index}>
-              <td>{patient.id}</td>
+              <td>{patient.userId}</td>
               <td>{patient.name}</td>
               <td>{patient.dob}</td>
               <td>{patient.gender}</td>

@@ -35,7 +35,7 @@ export default function Navbar() {
               className="cursor-pointer flex items-center gap-1 hover:text-gray-300"
             >
               <PersonFill />
-              <span>Đăng nhập</span>
+              <span>Đăng xuất</span>
             </div>
 
           </div>

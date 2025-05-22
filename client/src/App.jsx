@@ -9,6 +9,9 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import MedicalDeclaration from './Customer/MedicalDeclaration';
 import AppointmentForm from './Customer/AppointmentForm';
+import Results from './Customer/Results';
+import Doctorinfo from './Customer/Doctorinfo';
+import PatientInfo from './Customer/PatientInfo';
 
 function App() {
 
@@ -21,7 +24,9 @@ function App() {
         <Route path="/sign-up" element={<Register />} />
         <Route path="/md" element={<MedicalDeclaration />} />
         <Route path="/datlich" element={<AppointmentForm/>} />
-
+        <Route path="/ketqua" element={<Results/>} />
+        <Route path="/thongtinbacsi" element={<Doctorinfo/>} />
+        <Route path="/info" element={<PatientInfo/>} />
       </Routes>
     </BrowserRouter>
   );

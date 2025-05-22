@@ -51,53 +51,69 @@ export default function MedicalDeclaration() {
 
   // Handle submit
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    const payload = {
-      fullName: formData.name,
-      dob: formData.dob,
-      gender: formData.gender,
-      idNumber: formData.idNumber,
-      nationality: formData.nationality,
-      phone: formData.phone,
-      email: formData.email,
-      address: formData.address,
+  // 🔐 Lấy userId từ token
+  const token = localStorage.getItem("token");
+  if (!token) {
+    alert("Chưa đăng nhập. Vui lòng đăng nhập lại.");
+    return;
+  }
 
-      hasBHYT,
-      bhytCode: hasBHYT ? formData.bhyt : "",
-      bhytPlace: hasBHYT ? formData.bhytPlace : "",
-      bhytStartDate: hasBHYT ? formData.bhytStartDate : null,
-      bhytEndDate: hasBHYT ? formData.bhytEndDate : null,
+  let userId = "";
+  try {
+    const payload = JSON.parse(atob(token.split(".")[1]));
+    userId = payload.id;
+  } catch (err) {
+    alert("Token không hợp lệ");
+    return;
+  }
 
-      underlyingDiseases: formData.medicalHistory,
-      pastDiseases: formData.pastDiseases,
-      takingMedicine,
-      medicineInfo: takingMedicine ? formData.medicineInfo : "",
+  const payload = {
+    userId, // ✅ GỬI KÈM userId
+    fullName: formData.name,
+    dob: formData.dob,
+    gender: formData.gender,
+    idNumber: formData.idNumber,
+    nationality: formData.nationality,
+    phone: formData.phone,
+    email: formData.email,
+    address: formData.address,
 
-      hasSymptoms,
-      symptoms: hasSymptoms ? symptoms : [],
-      symptomStartDate: hasSymptoms ? formData.symptomStartDate : null,
-    };
+    hasBHYT,
+    bhytCode: hasBHYT ? formData.bhyt : "",
+    bhytPlace: hasBHYT ? formData.bhytPlace : "",
+    bhytStartDate: hasBHYT ? formData.bhytStartDate : null,
+    bhytEndDate: hasBHYT ? formData.bhytEndDate : null,
 
-    try {
-      const res = await fetch("http://localhost:5000/api/medical-declaration/md", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+    underlyingDiseases: formData.medicalHistory,
+    pastDiseases: formData.pastDiseases,
+    takingMedicine,
+    medicineInfo: takingMedicine ? formData.medicineInfo : "",
 
-      if (res.ok) {
-        alert("Thành công khai báo y tế! ");
-        navigate("/");
-      } else {
-        alert("Gửi khai báo thất bại");
-      }
-    } catch (err) {
-      alert("Lỗi gửi dữ liệu");
-      console.error(err);
-    }
+    hasSymptoms,
+    symptoms: hasSymptoms ? symptoms : [],
+    symptomStartDate: hasSymptoms ? formData.symptomStartDate : null,
   };
 
+  try {
+    const res = await fetch("http://localhost:5000/api/medical-declaration/md", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+
+    if (res.ok) {
+      alert("Thành công khai báo y tế!");
+      navigate("/");
+    } else {
+      alert("Gửi khai báo thất bại");
+    }
+  } catch (err) {
+    alert("Lỗi gửi dữ liệu");
+    console.error(err);
+  }
+};
   return (
     <div>
       <Navbar />

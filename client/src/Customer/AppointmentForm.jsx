@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import './AppointmentForm.css'
-const AppointmentForm = () => {
+import { useNavigate } from "react-router-dom";
+import Navbar from "../HomePage/navbar";
+export default function AppointmentForm() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
     date: '',
     time: '',
   });
-
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
 
@@ -20,7 +22,6 @@ const AppointmentForm = () => {
     e.preventDefault();
     setLoading(true);
     setMessage('');
-
     try {
       const res = await fetch('http://localhost:5000/api/v1/appointments/datlich', {
         method: 'POST',
@@ -31,6 +32,7 @@ const AppointmentForm = () => {
       if (res.ok) {
         const data = await res.json();
         setMessage(data.message || 'Đặt lịch thành công!');
+        navigate("/");
         setFormData({ name: '', phone: '', date: '', time: '' });
       } else {
         const errorData = await res.json();
@@ -43,63 +45,73 @@ const AppointmentForm = () => {
       setLoading(false);
     }
   };
+return (
+  <div>
+    <Navbar />
+    <div style={{ maxWidth: 400, margin: "auto", padding: "1rem" }}>
+      <form onSubmit={handleSubmit}>
+        <h2>Đặt lịch khám</h2>
 
-  return (
-    <form onSubmit={handleSubmit} style={{ maxWidth: 400, margin: 'auto' }}>
-      <h2>Đặt lịch khám</h2>
+        <label>Họ tên:</label>
+        <input
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          required
+        />
 
-      <label>Họ tên:</label>
-      <input
-        type="text"
-        name="name"
-        value={formData.name}
-        onChange={handleChange}
-        required
-      />
+        <label>Số điện thoại:</label>
+        <input
+          type="tel"
+          name="phone"
+          value={formData.phone}
+          onChange={handleChange}
+          required
+        />
 
-      <label>Số điện thoại:</label>
-      <input
-        type="tel"
-        name="phone"
-        value={formData.phone}
-        onChange={handleChange}
-        required
-      />
+        <label>Ngày khám:</label>
+        <input
+          type="date"
+          name="date"
+          value={formData.date}
+          onChange={handleChange}
+          required
+        />
 
-      <label>Ngày khám:</label>
-      <input
-        type="date"
-        name="date"
-        value={formData.date}
-        onChange={handleChange}
-        required
-      />
+        <label>Khung giờ:</label>
+        <select
+          name="time"
+          value={formData.time}
+          onChange={handleChange}
+          required
+        >
+          <option value="">-- Chọn khung giờ --</option>
+          <option value="08:00 - 09:00">08:00 - 09:00</option>
+          <option value="09:00 - 10:00">09:00 - 10:00</option>
+          <option value="14:00 - 15:00">14:00 - 15:00</option>
+          <option value="15:00 - 16:00">15:00 - 16:00</option>
+        </select>
 
-      <label>Khung giờ:</label>
-      <select
-        name="time"
-        value={formData.time}
-        onChange={handleChange}
-        required
-      >
-        <option value="">-- Chọn khung giờ --</option>
-        <option value="08:00 - 09:00">08:00 - 09:00</option>
-        <option value="09:00 - 10:00">09:00 - 10:00</option>
-        <option value="14:00 - 15:00">14:00 - 15:00</option>
-        <option value="15:00 - 16:00">15:00 - 16:00</option>
-      </select>
+        <button type="submit" disabled={loading} style={{ marginTop: 10 }}>
+          {loading ? "Đang gửi..." : "Đặt lịch"}
+        </button>
 
-      <button type="submit" disabled={loading} style={{ marginTop: 10 }}>
-        {loading ? 'Đang gửi...' : 'Đặt lịch'}
-      </button>
+        {message && (
+          <p
+            style={{
+              marginTop: 10,
+              color: message.includes("thành công") ? "green" : "red",
+            }}
+          >
+            {message}
+          </p>
+        )}
+      </form>
+    </div>
+  </div>
+);
 
-      {message && (
-        <p style={{ marginTop: 10, color: message.includes('thành công') ? 'green' : 'red' }}>
-          {message}
-        </p>
-      )}
-    </form>
-  );
 };
 
-export default AppointmentForm;
+
