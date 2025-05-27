@@ -21,7 +21,7 @@ export default function Login ()  {
       if(res.data && res.data.success){
         localStorage.setItem("token",res.data.token);
         toast.success('Đăng nhập thành công')
-        navigate('/');
+        navigate('/home');
       }else {
         toast.error(res.data.message);
       }

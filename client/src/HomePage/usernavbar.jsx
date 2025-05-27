@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { TelephoneFill, PersonFill, GeoAltFill } from "react-bootstrap-icons";
 
-export default function Navbar() {
+export default function UserNavbar() {
   const navigate = useNavigate();
 
   return (
@@ -10,7 +10,7 @@ export default function Navbar() {
       {/* Header */}
       <div className="flex justify-between items-center px-6 py-4 max-w-screen-xl mx-auto">
         {/* Logo & Slogan */}
-        <div className="flex items-center space-x-4" onClick={() => navigate("/")}>
+        <div className="flex items-center space-x-4" onClick={() => navigate("/home")}>
           <img
             src="https://dkkham.bachmai.gov.vn/build/assets/logo_bm_text-2d7d8ba1.png"
             alt="Logo"

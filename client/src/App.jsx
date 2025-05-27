@@ -12,6 +12,7 @@ import AppointmentForm from './Customer/AppointmentForm';
 import Results from './Customer/Results';
 import Doctorinfo from './Customer/Doctorinfo';
 import PatientInfo from './Customer/PatientInfo';
+import UserHome from './userhome';
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
     <ToastContainer />
       <Routes>
         <Route path="/" element={<Home />} />         {/*  Homepage */}
+        <Route path="/home" element={<UserHome />} /> 
         <Route path="/login" element={<Login />} />
         <Route path="/sign-up" element={<Register />} />
         <Route path="/md" element={<MedicalDeclaration />} />
