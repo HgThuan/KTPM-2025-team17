@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../HomePage/navbar";
+import UserNavbar from "../HomePage/usernavbar";
 
 export default function MedicalDeclaration() {
   const navigate = useNavigate();
@@ -116,7 +116,7 @@ export default function MedicalDeclaration() {
 };
   return (
     <div>
-      <Navbar />
+      <UserNavbar />
       <div className="max-w-4xl mx-auto p-6">
         <h1 className="text-2xl font-bold mb-4">Khai báo y tế</h1>
 

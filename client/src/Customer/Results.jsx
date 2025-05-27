@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Navbar from "../HomePage/navbar";
+import UserNavbar from "../HomePage/usernavbar";
 import "./Results.css";
 
 const Results = () => {
@@ -35,7 +35,7 @@ useEffect(() => {
 
   return (
     <div>
-      <Navbar />
+      <UserNavbar/>
       <div className="container">
         <h1 className="title">Tra cứu kết quả</h1>
 

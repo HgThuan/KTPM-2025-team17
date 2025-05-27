@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Doctorinfo.css";
-import Navbar from "../HomePage/navbar";
+import UserNavbar from "../HomePage/usernavbar";
 
 const Doctorinfo = () => {
   const [bacSiData, setBacSiData] = useState([]);
@@ -23,7 +23,7 @@ const Doctorinfo = () => {
 
   return (
     <div>
-      <Navbar />
+      <UserNavbar />
       <div className="container">
         <h1 className="title">Danh sách bác sĩ</h1>
         <ul className="doctor-list">

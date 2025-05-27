@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Navbar from "../HomePage/navbar";
+import UserNavbar from "../HomePage/usernavbar";
 
 export default function PatientInfo() {
   const { idNumber } = useParams(); // Lấy idNumber từ URL, ví dụ /patient-info/:idNumber
@@ -30,7 +30,7 @@ useEffect(() => {
 
   return (
     <div className="patient-info-page">
-      <Navbar />
+      <UserNavbar />
       <div className="container">
         <h1 className="title">Thông tin bệnh nhân</h1>
 

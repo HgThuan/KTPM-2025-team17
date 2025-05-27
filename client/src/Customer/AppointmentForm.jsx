@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './AppointmentForm.css'
 import { useNavigate } from "react-router-dom";
-import Navbar from "../HomePage/navbar";
+import UserNavbar from "../HomePage/usernavbar";
 export default function AppointmentForm() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -47,7 +47,7 @@ export default function AppointmentForm() {
   };
 return (
   <div>
-    <Navbar />
+    <UserNavbar/>
     <div style={{ maxWidth: 400, margin: "auto", padding: "1rem" }}>
       <form onSubmit={handleSubmit}>
         <h2>Đặt lịch khám</h2>
